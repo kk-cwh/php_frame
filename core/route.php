@@ -2,6 +2,8 @@
 namespace Core;
 
 
+use Core\lib\Config;
+
 class Route
 {
 
@@ -11,8 +13,9 @@ class Route
     function __construct()
     {
 
+        $routeConfig = Config::get('route');
         if (isset($_SERVER['PATH_INFO'])) {
-             // p($_SERVER);
+            // p($_SERVER);
             // p(explode('/',trim($_SERVER['REQUEST_URI'],'/')));
 
             $path = explode('/', trim($_SERVER['PATH_INFO'], '/'));
@@ -23,12 +26,12 @@ class Route
             if (isset($path[0])) {
                 $this->controlName = $path[0];
             } else {
-                $this->controlName = 'index';
-                $this->actionName = 'index';
+                $this->controlName = $routeConfig['ctrl_def'];
+                $this->actionName = $routeConfig['action_def'];
             }
         } else {
-            $this->controlName = 'index';
-            $this->actionName = 'index';
+            $this->controlName = $routeConfig['ctrl_def'];
+            $this->actionName = $routeConfig['action_def'];
         }
     }
 }

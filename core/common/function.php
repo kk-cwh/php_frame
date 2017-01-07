@@ -6,6 +6,9 @@ namespace Core;
  * Date: 2017/1/6
  * Time: 16:30
  */
+/**
+ * @param $var
+ */
 function p($var)
 {
     if (is_bool($var)) {

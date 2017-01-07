@@ -3,7 +3,6 @@
  * 入口文件
  * 1 定义常量
  *
- *
  */
 
 define('BASEDIR', realpath('./'));

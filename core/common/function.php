@@ -1,11 +1,6 @@
 <?php
 namespace Core;
-/**
- * Created by PhpStorm.
- * User: pc188
- * Date: 2017/1/6
- * Time: 16:30
- */
+
 /**
  * @param $var
  */

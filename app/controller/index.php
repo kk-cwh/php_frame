@@ -5,10 +5,8 @@ use Core\model;
 use Core\p;
 
 /**
- * Created by PhpStorm.
- * User: pc188
- * Date: 2017/1/7
- * Time: 10:43
+ * Class index 控制器
+ * @package App\Controller
  */
 class index extends Loader {
     function __construct()

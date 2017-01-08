@@ -1,18 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><?php echo $title?></title>
-</head>
-<body>
-<?php
-echo $hello;
-?>
-<h3><?php
-       foreach ( $users as $u) {
-          echo 'id:'.$u['id'].'--name:'.$u['name'];
-          echo '<br/>';
+{% extends "/layout/layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+{{ parent() }}
+<style type="text/css">
+    .important {
+        color: #336699;
     }
-    ?></h3>
-</body>
-</html>
+</style>
+{% endblock %}
+{% block content %}
+
+<div>
+    <div class="container">
+        <h1>留言板</h1>
+        <ul>
+            <li><a href="/index/add">添加留言</a></li>
+            <li><a href="/index/index">全部留言</a></li>
+        </ul>
+        <div class="row">
+
+
+            {% for msg in messages %}
+            <div class="col-xs-6 col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item">{{msg.title}}</li>
+                    <li class="list-group-item">{{msg.content}}</li>
+                    <li class="list-group-item">{{msg.createtime|date('Y-m-d H:i:s')}}</li>
+            </div>
+            </ul>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

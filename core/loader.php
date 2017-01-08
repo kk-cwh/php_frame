@@ -1,7 +1,10 @@
 <?php
 namespace Core;
 
+use Core\lib\log;
 use Core\Route;
+use Twig_Environment;
+use Twig_Loader_Filesystem;
 
 class Loader
 {
@@ -10,6 +13,8 @@ class Loader
 
     public static function run()
     {
+        log::init();
+
         $route = new Route();
         $controlName = $route->controlName;
         $action = $route->actionName;
@@ -22,6 +27,7 @@ class Loader
             $controlClass = new $controlName();
             if (method_exists($controlClass, $action)) {
                 $controlClass->$action();
+                log::log('controller:'.$controlName.' Action:'.$action);
             } else {
                 throw new \Exception('找不到方法' . $action);
             }
@@ -55,10 +61,20 @@ class Loader
     public function display($view)
     {
         $file = APP . '/view/' . $view;
+//
+//        if (is_file($file)) {
+//            extract($this->data);
+//            include $file;
+//        }
 
         if (is_file($file)) {
-            extract($this->data);
-            include $file;
+
         }
+        $loader = new Twig_Loader_Filesystem(APP . '/view/');
+        $twig = new Twig_Environment($loader, array(
+            'cache' => BASEDIR.'/storage/log',
+        ));
+        $template = $twig->load($view);
+        $template->display($this->data);
     }
 }

@@ -22,6 +22,8 @@ class Route
 
             if (isset($path[1])) {
                 $this->actionName = $path[1];
+            }else{
+                $this->actionName = $routeConfig['action_def'];
             }
             if (isset($path[0])) {
                 $this->controlName = $path[0];
